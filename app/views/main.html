@@ -1,0 +1,44 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active">
+      <a ng-click="boopIncrement()" href="">
+        Boop <span class="badge">{{boops.boop}}</span>
+      </a>
+    </li>
+    <!-- <li><button ng-click="boopDecrement()" class="btn btn-success">Beep</button></li> -->
+    <!-- <li class="disabled"><a ng-href="#">Contact</a></li> -->
+  </ul>
+  <h3 class="text-muted">Hack UMass Chat Room</h3>
+</div>
+
+<div ng-hide="loadAll" id="messagesDiv">
+  <div ng-repeat="msg in messages | orderByPriority | orderBy:'time':true | limitTo:10"><strong>{{msg.from}} @ {{msg.time | date:'h:mm:ss a'}}</strong>: {{msg.body}}</div>
+</div>
+
+<div ng-show="loadAll" id="messagesDiv">
+  <div ng-repeat="msg in messages | orderByPriority | orderBy:'time':true"><strong>{{msg.from}} @ {{msg.time | date:'h:mm:ss a'}}</strong>: {{msg.body}}</div>
+</div>
+
+<br />
+
+<form role="form">
+  <div class="form-group">
+    <label for="nameInput">Name</label>
+    <input ng-model="name" type="text" class="form-control" id="nameInput" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="messageInput">Message</label>
+    <input ng-model="msg" ng-keydown="addMessage($event)" type="text" class="form-control" id="messageInput" placeholder="Message...">
+  </div>
+</form>
+
+<br />
+
+<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="loadAll = !loadAll">Toggle All Messages</button>
+
+<br />
+
+<div class="footer text-center">
+  <p>v 1.0.0 - Released</p>
+  <p>v 1.0.1 - Limit messages; descending order; Boopcrementer</p>
+</div>
